@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:github_client_flutter/services/services.dart';
 import 'package:github_client_flutter/ui/repo_details.dart';
+import 'package:github_client_flutter/utils/constants.dart';
 import 'package:github_client_flutter/utils/localization/localization.dart';
+import 'package:github_client_flutter/utils/navigation.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/services.dart';
 
@@ -19,6 +21,12 @@ class MyApp extends StatelessWidget {
       create: (_) => Services.create(),
       dispose: (_, Services service) => service.client.dispose(),
       child: MaterialApp(
+        theme: ThemeData(
+          primaryColor: Colors.black,
+          accentColor: Colors.white
+        ),
+          initialRoute: Constants.ROUTE_REPO_DETAILS,
+          onGenerateRoute: NavigationUtils.generateRoute,
           debugShowCheckedModeBanner: false,
           localizationsDelegates: [
             const MyLocalizationsDelegate(),

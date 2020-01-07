@@ -17,8 +17,7 @@ class _CommitListItemState extends State<CommitListItem> {
   @override
   void initState() {
     super.initState();
-    var date = DateTime.parse(widget.commits["commit"]["committer"]["date"]);
-    committedDate = new DateFormat.yMMMd().format(date);
+    committedDate = widget.commits["commit"]["committer"]["date"];
   }
 
   @override

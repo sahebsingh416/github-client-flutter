@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:github_client_flutter/ui/home.dart';
 import 'package:github_client_flutter/utils/constants.dart';
 import 'package:github_client_flutter/utils/localization/localization.dart';
+import 'package:github_client_flutter/utils/navigation.dart';
+
 
 class RepoDetails extends StatefulWidget {
   @override
@@ -86,10 +87,7 @@ class _RepoDetailsState extends State<RepoDetails> {
           child: RaisedButton(
             onPressed: () {
               _formKey.currentState.validate()
-                  ? Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) {
-                      return HomeScreen(
-                          _userController.text, _repoController.text);
-                    }))
+                  ? NavigationUtils.pushReplacement(context, Constants.ROUTE_HOME,arguments: {"username" : _userController.text,"reponame" : _repoController.text})
                   : Container();
             },
             color: Colors.black,

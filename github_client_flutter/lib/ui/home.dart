@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:github_client_flutter/ui/repo_details.dart';
+import 'package:github_client_flutter/utils/navigation.dart';
 import 'package:github_client_flutter/widgets/commit_list_item.dart';
 import 'package:github_client_flutter/services/services.dart';
 import 'package:github_client_flutter/utils/constants.dart';
@@ -33,44 +33,39 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(primaryColor: Colors.black, accentColor: Colors.white),
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-          appBar: AppBar(
-            leading: InkWell(
-              child: Padding(
-                padding: EdgeInsets.fromLTRB(10, 10, 0, 10),
-                child: Image.asset(
-                  Constants.GITHUB_LOGO,
-                  fit: BoxFit.fitHeight,
-                ),
-              ),
-              onTap: () {
-                Navigator.pushReplacement(context,
-                    MaterialPageRoute(builder: (_) {
-                  return RepoDetails();
-                }));
-              },
+    return Scaffold(
+      appBar: AppBar(
+        leading: InkWell(
+          child: Padding(
+            padding: EdgeInsets.fromLTRB(10, 10, 0, 10),
+            child: Image.asset(
+              Constants.GITHUB_LOGO,
+              fit: BoxFit.fitHeight,
             ),
-            backgroundColor: Colors.black,
-            title: Text(Localization.of(context).github),
-            centerTitle: false,
-            actions: <Widget>[
-              IconButton(
-                icon: Icon(
-                  Icons.refresh,
-                  color: Colors.white,
-                ),
-                onPressed: () {
-                  setState(() {});
-                  // final response =
-                  //   await Provider.of<Services>(context,listen: false).getCommits(widget.username,widget.reponame);
-                },
-              )
-            ],
           ),
-          body: _buildBody(context, widget.username, widget.reponame)),
+          onTap: () {
+            NavigationUtils.pushReplacement(
+                context, Constants.ROUTE_REPO_DETAILS);
+          },
+        ),
+        backgroundColor: Colors.black,
+        title: Text(Localization.of(context).github),
+        centerTitle: false,
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(
+              Icons.refresh,
+              color: Colors.white,
+            ),
+            onPressed: () {
+              setState(() {});
+              // final response =
+              //   await Provider.of<Services>(context,listen: false).getCommits(widget.username,widget.reponame);
+            },
+          )
+        ],
+      ),
+      body: _buildBody(context, widget.username, widget.reponame),
     );
   }
 }
