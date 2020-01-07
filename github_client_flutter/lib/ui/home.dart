@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:github_client_flutter/components/commit_list_item.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -27,9 +28,7 @@ class _HomeScreenState extends State<HomeScreen> {
             itemCount: 10,
             primary: true,
             itemBuilder: (context, int index) {
-              return ListTile(
-                title: Text("Commits"),
-              );
+              return CommitListItem();
             },
           )),
     );
