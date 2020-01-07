@@ -44,8 +44,8 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
           onTap: () {
-            NavigationUtils.pushReplacement(
-                context, Constants.ROUTE_REPO_DETAILS);
+            NavigationUtils.pop(
+                context,);
           },
         ),
         backgroundColor: Colors.black,
@@ -82,7 +82,16 @@ FutureBuilder _buildBody(
         } catch (e) {
           return Container(
             child: Center(
-              child: Text("data"),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Image.asset(Constants.GITHUB_LOGO_BLACK),
+                  Padding(
+                    padding: EdgeInsets.only(top: 8.0),
+                    child: Text(Localization.of(context).nothingFound,style: TextStyle(fontSize: 20),),
+                  )
+                ],
+              ),
             ),
           );
         }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:github_client_flutter/utils/constants.dart';
-import 'package:intl/intl.dart';
 
 class CommitListItem extends StatefulWidget {
   final Map<dynamic, dynamic> commits;
@@ -50,7 +49,7 @@ class _CommitListItemState extends State<CommitListItem> {
                     style: TextStyle(fontSize: 20),
                   ),
                 ),
-                Row(
+                Stack(
                   children: <Widget>[
                     Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -65,7 +64,7 @@ class _CommitListItemState extends State<CommitListItem> {
                               : Image.asset(Constants.GITHUB_LOGO)),
                     ),
                     Padding(
-                      padding: EdgeInsets.only(left: 8.0),
+                      padding: EdgeInsets.only(left: MediaQuery.of(context).size.width*0.12,top: MediaQuery.of(context).size.width*0.03),
                       child: Text(
                           committerName + " committed on " + committedDate),
                     )

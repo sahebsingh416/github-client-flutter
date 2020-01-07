@@ -71,6 +71,8 @@ class _RepoDetailsState extends State<RepoDetails> {
       validator: (value) {
         if (value.isEmpty) {
           return errorMessage;
+        }else{
+          return null;
         }
       },
       style: TextStyle(color: Colors.black),
@@ -87,7 +89,7 @@ class _RepoDetailsState extends State<RepoDetails> {
           child: RaisedButton(
             onPressed: () {
               _formKey.currentState.validate()
-                  ? NavigationUtils.pushReplacement(context, Constants.ROUTE_HOME,arguments: {"username" : _userController.text,"reponame" : _repoController.text})
+                  ? NavigationUtils.push(context, Constants.ROUTE_HOME,arguments: {"username" : _userController.text,"reponame" : _repoController.text})
                   : Container();
             },
             color: Colors.black,

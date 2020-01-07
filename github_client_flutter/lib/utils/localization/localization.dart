@@ -54,6 +54,7 @@ abstract class Localization {
   String get msgUserName;
   String get repoName;
   String get msgRepoName;
+  String get nothingFound;
 
 
 

@@ -21,5 +21,8 @@ class LocalizationEN implements Localization {
 
   @override
   String get userName => "Username";
+
+  @override
+  String get nothingFound => "No data found";
   
 }
