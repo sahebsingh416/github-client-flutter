@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:github_client_flutter/components/commit_list_item.dart';
+import 'package:github_client_flutter/ui/repo_details.dart';
+import 'package:github_client_flutter/widgets/commit_list_item.dart';
 import 'package:github_client_flutter/services/services.dart';
 import 'package:github_client_flutter/utils/constants.dart';
 import 'package:github_client_flutter/utils/localization/localization.dart';
@@ -16,7 +17,6 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   bool dataLoaded = false;
-  void test() {}
 
   Future callCommitAPi() async {
     await Provider.of<Services>(context, listen: false)
@@ -24,19 +24,35 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    Future.delayed(Duration.zero, () {
+      callCommitAPi();
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    callCommitAPi();
     return MaterialApp(
       theme: ThemeData(primaryColor: Colors.black, accentColor: Colors.white),
       debugShowCheckedModeBanner: false,
       home: Scaffold(
           appBar: AppBar(
-            leading: Padding(
+            leading: InkWell(
+              child: Padding(
                 padding: EdgeInsets.fromLTRB(10, 10, 0, 10),
                 child: Image.asset(
                   Constants.GITHUB_LOGO,
                   fit: BoxFit.fitHeight,
-                )),
+                ),
+              ),
+              onTap: () {
+                Navigator.pushReplacement(context,
+                    MaterialPageRoute(builder: (_) {
+                  return RepoDetails();
+                }));
+              },
+            ),
             backgroundColor: Colors.black,
             title: Text(Localization.of(context).github),
             centerTitle: false,
@@ -69,7 +85,11 @@ FutureBuilder _buildBody(
           List<dynamic> commits = json.decode(snapshot.data.bodyString);
           return buildUser(commits, context);
         } catch (e) {
-          return Container();
+          return Container(
+            child: Center(
+              child: Text("data"),
+            ),
+          );
         }
       } else {
         return Container(

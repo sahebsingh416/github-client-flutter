@@ -86,7 +86,7 @@ class _RepoDetailsState extends State<RepoDetails> {
           child: RaisedButton(
             onPressed: () {
               _formKey.currentState.validate()
-                  ? Navigator.push(context, MaterialPageRoute(builder: (_) {
+                  ? Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) {
                       return HomeScreen(
                           _userController.text, _repoController.text);
                     }))
